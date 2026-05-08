@@ -46,20 +46,9 @@ PathForge solves this by providing a visual, node-based roadmap system that impr
 
 ### Frontend
 - React
-- TypeScript
-
-### Visualization
-- React Flow (for node-based UI)
 
 ### Styling
 - Tailwind CSS
-- Framer Motion (animations)
-
----
-
-## 🏗️ Project Structure
-
-src/  ┣ components/  ┃ ┣ Sidebar.tsx  ┃ ┣ RoadmapCanvas.tsx  ┃ ┣ NodeCard.tsx  ┃ ┣ NodeModal.tsx  ┃ ┗ ProgressBar.tsx  ┣ store/  ┃ ┗ roadmapStore.ts  ┣ types/  ┣ utils/  ┣ hooks/  ┗ App.tsx
 
 ---
 
@@ -79,9 +68,6 @@ src/  ┣ components/  ┃ ┣ Sidebar.tsx  ┃ ┣ RoadmapCanvas.tsx  ┃ ┣ N
 - Delete node
 
 ### 4. Settings Page (Optional)
-- Theme toggle
-- Export data
-- Clear storage
 
 ---
 
@@ -106,7 +92,7 @@ npm run dev
 
 ## 📦 Dependencies
 
-react typescript reactflow tailwindcss framer-motion
+react tailwindcss 
 
 ---
 
