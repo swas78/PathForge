@@ -11,8 +11,10 @@ export default function PlanningPage() {
   const [roadmapTitle, setRoadmapTitle] = useState("");
 
   return (
+    // top content
     <div className="min-h-screen bg-[#050816] text-white flex flex-col">
       <div className="flex items-center justify-between px-6 py-4 border-b border-white/10">
+        {/* top left button */}
         <button
           type="button"
           onClick={() => navigate(-1)}
@@ -26,6 +28,7 @@ export default function PlanningPage() {
         <div className="w-9 h-9 rounded-xl bg-linear-to-r from-indigo-500 to-cyan-500" />
       </div>
 
+      {/* box */}
       <div className="flex-1 flex flex-col items-center justify-center px-6 py-10">
         <div className="text-center max-w-2xl">
           <p className="text-xs tracking-[0.3em] text-indigo-300 uppercase">

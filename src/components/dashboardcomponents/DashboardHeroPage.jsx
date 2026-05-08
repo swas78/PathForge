@@ -5,10 +5,10 @@ import EditNodeModal from "../dashboardfeatures/EditNodeModal";
 
 const SIDEBAR_ITEMS = [
   { icon: Map, label: "Roadmaps", active: true },
-  { icon: Flag, label: "Milestones" },
-  { icon: BarChart2, label: "Analytics" },
-  { icon: Users, label: "Team" },
-  { icon: Settings, label: "Settings", to: "/settingpage" },
+  { icon: Flag, label: "Milestones (Coming Soon)" },
+  { icon: BarChart2, label: "Analytics (Coming Soon)" },
+  { icon: Users, label: "Team (Coming Soon)" },
+  { icon: Settings, label: "Settings (In Progress)", to: "/settingpage" },
 ];
 
 const CARD_WIDTH = 256;
@@ -80,6 +80,7 @@ function getStepPosition(index) {
   };
 }
 
+// from Ai hume banana nhi aa rha tha
 function buildConnectorPath(from, to) {
   const fromCenterY = from.top + CARD_HEIGHT / 2;
   const toCenterY = to.top + CARD_HEIGHT / 2;
@@ -103,29 +104,34 @@ function buildConnectorPath(from, to) {
   return `M ${startX} ${startY} L ${startX} ${midY} L ${endX} ${midY} L ${endX} ${endY}`;
 }
 
+// main dashboard
 function DashboardHeroPage() {
   const { state } = useLocation();
   const [open, setOpen] = useState(false);
   const [steps, setSteps] = useState(initialSteps);
   const [selectedStepId, setSelectedStepId] = useState(initialSteps[0]?.id ?? null);
-  const roadmapTitle =
-    state?.roadmapTitle ||
-    localStorage.getItem("pathforge-roadmap-title") ||
-    "Project Flow";
+  const roadmapTitle = state?.roadmapTitle || "Project Flow";
 
   // Position data is derived on each render so the visual order always matches the step list.
+  //  From AI
+  // add left and top
   const positionedSteps = steps.map((step, index) => ({ ...step, ...getStepPosition(index) }));
+
+
   const selectedStep = steps.find((step) => step.id === selectedStepId) ?? null;
 
+  // create connecting arrows
   const connectors = positionedSteps.slice(0, -1).map((step, index) => ({
     id: `${step.id}-${positionedSteps[index + 1].id}`,
     path: buildConnectorPath(step, positionedSteps[index + 1]),
   }));
 
+  //  From Ai
   const canvasWidth = CANVAS_PADDING * 2 + COLUMN_COUNT * CARD_WIDTH + (COLUMN_COUNT - 1) * COLUMN_GAP;
   const rowCount = Math.max(1, Math.ceil(positionedSteps.length / COLUMN_COUNT));
   const canvasHeight = CANVAS_PADDING * 2 + rowCount * CARD_HEIGHT + (rowCount - 1) * ROW_GAP;
 
+  // ADD new card
   const addStep = () => {
     const newId = String(steps.length + 1);
 
@@ -141,23 +147,27 @@ function DashboardHeroPage() {
     ]);
   };
 
+  // open modeal and saves slected step id
   const handleOpenStep = (stepId) => {
     setSelectedStepId(stepId);
     setOpen(true);
   };
 
+  // delete card
   const handleDeleteStep = () => {
     if (!selectedStepId) {
       return;
     }
 
     // Rebuild the visible list after deletion so numbering and connectors stay in sync.
+    // From Ai
     const updatedSteps = steps.filter((step) => step.id !== selectedStepId);
     setSteps(updatedSteps);
     setSelectedStepId(updatedSteps[0]?.id ?? null);
     setOpen(false);
   };
 
+  // save step and update step
   const handleSaveStep = (updatedStep) => {
     setSteps(
       steps.map((step) =>
@@ -212,10 +222,13 @@ function DashboardHeroPage() {
           </div>
         </div>
 
+        {/* positioning pura ai se karvai hai */}
         <div className="h-[calc(100%-110px)] overflow-auto rounded-2xl border border-white/10 bg-[#0d1328] p-5">
           <div className="relative min-h-full" style={{ width: `${canvasWidth}px`, height: `${canvasHeight}px` }}>
+            {/* draw roadmap arrows */}
             <svg className="pointer-events-none absolute inset-0 h-full w-full overflow-visible">
               <defs>
+                {/* create arrow head  */}
                 <marker
                   id="step-arrow"
                   markerWidth="10"
@@ -228,7 +241,7 @@ function DashboardHeroPage() {
                   <path d="M 0 0 L 10 5 L 0 10 z" fill="#818cf8" />
                 </marker>
               </defs>
-
+              {/* draw actual lines */}
               {connectors.map((connector) => (
                 <path
                   key={connector.id}
@@ -243,12 +256,14 @@ function DashboardHeroPage() {
               ))}
             </svg>
 
+            {/* add position to all the steps */}
             {positionedSteps.map((step, index) => (
               <button
                 key={step.id}
                 type="button"
                 onClick={() => handleOpenStep(step.id)}
                 className={`absolute flex flex-col justify-between rounded-2xl border px-5 py-4 text-left transition ${
+                  // dynamic styling
                   step.active
                     ? "border-indigo-400/40 bg-[#141c35]"
                     : "border-white/10 bg-[#10172d] hover:border-white/20"

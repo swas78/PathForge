@@ -65,6 +65,7 @@ function EditNodeModal({ isOpen, onClose, step, onDelete, onSave }) {
                 onChange={(e) => setBadge(e.target.value)}
                 className="mt-2 w-full rounded-lg border border-white/10 bg-[#0f1535] px-3 py-2 outline-none focus:border-indigo-400"
               >
+                {/* Renders all Options from the arr */}
                 {BADGE_OPTIONS.map((option) => (
                   <option key={option}>{option}</option>
                 ))}
@@ -79,6 +80,7 @@ function EditNodeModal({ isOpen, onClose, step, onDelete, onSave }) {
                 onChange={(e) => setStatus(e.target.value)}
                 className="mt-2 w-full rounded-lg border border-white/10 bg-[#0f1535] px-3 py-2 outline-none focus:border-indigo-400"
               >
+                {/* render all options from the arr */}
                 {STATUS_OPTIONS.map((option) => (
                   <option key={option}>{option}</option>
                 ))}
